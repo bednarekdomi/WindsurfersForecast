@@ -11,7 +11,5 @@ import java.util.List;
 public class LocationDto {
     private Long id;
     private String name;
-    private LocalDate today;
-    private List<Double> temperaturesFor16Days;
-    private List <Double> windFor16Days;
+    private List<Forecast>forecasts;
 }

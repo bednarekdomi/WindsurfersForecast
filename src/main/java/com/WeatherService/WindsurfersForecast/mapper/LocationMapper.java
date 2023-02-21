@@ -11,18 +11,16 @@ import java.util.stream.Collectors;
 public class LocationMapper {
 
     public Location mapToLocation(LocationDto locationDto){
-        return new Location(locationDto.getId(), locationDto.getName(), locationDto.getToday(),
-                locationDto.getTemperaturesFor16Days(), locationDto.getWindFor16Days());
+        return new Location(locationDto.getId(), locationDto.getName(), locationDto.getForecasts());
     }
 
     public LocationDto mapToLocationDto(Location location){
-        return new LocationDto(location.getId(), location.getName(), location.getToday(),
-                location.getTemperaturesFor16Days(), location.getWindFor16Days());
+        return new LocationDto(location.getId(), location.getName(), location.getForecasts());
     }
 
     public List<LocationDto> mapToLocationDtoList(List<Location>locationsList){
-        return locationsList.stream().map(l -> new LocationDto(l.getId(), l.getName(), l.getToday(),
-                l.getTemperaturesFor16Days(), l.getWindFor16Days())).collect(Collectors.toList());
+        return locationsList.stream().map(l -> new LocationDto(l.getId(), l.getName(), l.getForecasts()))
+                .collect(Collectors.toList());
     }
 
 }

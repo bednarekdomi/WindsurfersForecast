@@ -20,8 +20,9 @@ public class Location {
     @Column(nullable = false)
     private Long id;
     private String name;
-    private LocalDate today;
-    private List <Double> temperaturesFor16Days;
-    private List <Double> windFor16Days;
+    @OneToMany
+    private List<Forecast>forecasts;
+
+
 
 }
