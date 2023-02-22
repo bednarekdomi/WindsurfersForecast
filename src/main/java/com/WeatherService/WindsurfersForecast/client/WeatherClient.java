@@ -20,10 +20,14 @@ public class WeatherClient {
 
     private RestTemplate restTemplate = new RestTemplate();
 
+    public WeatherClient() throws JsonProcessingException {
+    }
+
     private static final String API_KEY = "0ba7e66f8dfb4e528b936d9d36bc4740";
     private static final String API_URL = "https://api.weatherbit.io/v2.0/forecast/daily?city=";
 
     public List<Forecast> getForecast(String city) throws JsonProcessingException {
+
         String apiUrl = API_URL + city + "&key=" + API_KEY;
 
         String jsonResponse = restTemplate.getForObject(apiUrl, String.class);
@@ -44,13 +48,10 @@ public class WeatherClient {
             }
         }
 
-        for (Forecast weatherData : weatherDataList) {
-            System.out.println("Wind speed for " + weatherData.getDatetime() + ": " + weatherData.getWindSpd() + ": "
-            + "city" + weatherData.getCityName());
-        }
-        return weatherDataList;
-    }
 
+        return weatherDataList;
+
+    }
 
 
 }

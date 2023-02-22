@@ -22,4 +22,8 @@ public class Forecast {
     @JsonProperty("wind_spd")
     private Double windSpd;
 
+    public Double getBestForecast(){
+        Double result = windSpd * 3 + avrTemp;
+        return result;
+    }
 }
