@@ -1,5 +1,5 @@
 plugins {
-	java
+	id("java")
 	id("org.springframework.boot") version "2.7.8"
 	id("io.spring.dependency-management") version "1.0.15.RELEASE"
 }
@@ -25,6 +25,11 @@ dependencies {
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("mysql:mysql-connector-java:8.0.32")
+	implementation("com.googlecode.json-simple:json-simple:1.1.1")
+	implementation("com.mashape.unirest:unirest-java:1.4.9")
+
+
 }
 
 tasks.withType<Test> {

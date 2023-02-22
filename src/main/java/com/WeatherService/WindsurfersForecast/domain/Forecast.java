@@ -1,22 +1,25 @@
 package com.WeatherService.WindsurfersForecast.domain;
 
-import javax.persistence.*;
-import java.time.LocalTime;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-@Entity
-@Table(name="Forecasts")
+import java.time.LocalDate;
+import java.util.List;
+
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Forecast {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
-    private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "location_id")
-    private Location location;
-    private LocalTime day;
-    private double temperature;
-    private double windSpeed;
-
+    @JsonProperty("datetime")
+    private LocalDate datetime;
+    @JsonProperty("city_name")
+    private String cityName;
+    @JsonProperty("country_code")
+    private String countryCode;
+    @JsonProperty("temp")
+    private Double avrTemp;
+    @JsonProperty("wind_spd")
+    private Double windSpd;
 
 }
