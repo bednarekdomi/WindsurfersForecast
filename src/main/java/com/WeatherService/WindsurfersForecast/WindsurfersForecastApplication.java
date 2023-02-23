@@ -17,9 +17,5 @@ public class WindsurfersForecastApplication {
 
 	public static void main(String[] args) throws JsonProcessingException {
 		SpringApplication.run(WindsurfersForecastApplication.class, args);
-
-		LocationService locationService = new LocationService();
-		locationService.getLocationWithBestConditions(LocalDate.now());
-
 	}
 }

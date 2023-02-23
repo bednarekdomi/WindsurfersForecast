@@ -41,16 +41,13 @@ public class WeatherClient {
                 Forecast weatherData = new Forecast();
                 weatherData.setDatetime(LocalDate.parse(jsonNode.get("datetime").asText()));
                 weatherData.setAvrTemp(jsonNode.get("temp").asDouble());
-                weatherData.setWindSpd(jsonNode.get("wind_spd").asDouble());;
+                weatherData.setWindSpd(jsonNode.get("wind_spd").asDouble());
                 weatherDataList.add(weatherData);
             }
         }
 
-
         return weatherDataList;
-
     }
-
 
 }
 

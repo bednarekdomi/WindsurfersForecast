@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 public class Forecast {
 
     private LocalDate datetime;
