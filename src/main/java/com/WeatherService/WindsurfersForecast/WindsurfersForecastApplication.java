@@ -19,7 +19,7 @@ public class WindsurfersForecastApplication {
 		SpringApplication.run(WindsurfersForecastApplication.class, args);
 
 		LocationService locationService = new LocationService();
-		locationService.getLocationWithBestConditions(LocalDate.ofEpochDay(2023-02-23));
+		locationService.getLocationWithBestConditions(LocalDate.now());
 
 	}
 }
