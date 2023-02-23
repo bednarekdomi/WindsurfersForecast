@@ -12,11 +12,17 @@ public class Location {
     private String name;
     private List<Forecast> forecastsForLocation;
 
-    public Forecast getForecastWithBestConditions(){
+    public boolean getForecastWithBestConditions() {
         forecastsForLocation.stream()
-                .map(f -> f.getBestForecast())
-                .max()
+                .filter(forecast -> forecast.getAvrTemp() > 5 && forecast.getAvrTemp() < 35)
+                .filter(f -> f.getWindSpd() > 5 && f.getWindSpd() < 18)
+                .collect(Collectors.toList());
+        if (forecastsForLocation.size() == 16) {
+                    return true;
+        }return false;
+    }
 
-        forecastsForLocation.
+    public List<Forecast> getForecastsForLocation() {
+        return forecastsForLocation;
     }
 }

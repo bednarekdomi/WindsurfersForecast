@@ -22,36 +22,65 @@ public class LocationService {
     public LocationService() throws JsonProcessingException {
     }
 
-    public void getLocationWithBestConditions(LocalDate date) throws JsonProcessingException {
+    public Location getLocationWithBestConditions(LocalDate date) throws JsonProcessingException {
         List<Forecast> forecastForJastarnia = weatherClient.getForecast("Jastarnia");
         List<Forecast> forecastForBridgertown = weatherClient.getForecast("Bridgertown");
         List<Forecast> forecastForFortaleza = weatherClient.getForecast("Fortaleza");
         List<Forecast> forecastForPissouri = weatherClient.getForecast("Pissouri");
         List<Forecast> forecastsForLeMorne = weatherClient.getForecast("Le Morne");
 
-        Location jastarnia = new Location("Jastarnia", forecastForJastarnia);
-        Location bridgertown = new Location("Bridgertown", forecastForBridgertown);
-        Location fortaleza = new Location("Fortaleza", forecastForFortaleza);
-        Location pissouri = new Location("Pissouri", forecastForPissouri);
-        Location leMorne = new Location("Le Morne", forecastsForLeMorne);
+        Location jastarnia = new Location("Jastarnia(Poland)", forecastForJastarnia);
+        Location bridgertown = new Location("Bridgertown (Barbados)", forecastForBridgertown);
+        Location fortaleza = new Location("Fortaleza(Brazil)", forecastForFortaleza);
+        Location pissouri = new Location("Pissouri (Cyprus)", forecastForPissouri);
+        Location leMorne = new Location("Le Morne (Mauritius)", forecastsForLeMorne);
 
-        List<Location> forecastForLocations = new ArrayList<>();
-        forecastForLocations.add(jastarnia);
-        forecastForLocations.add(bridgertown);
-        forecastForLocations.add(fortaleza);
-        forecastForLocations.add(pissouri);
-        forecastForLocations.add(leMorne);
+        List<Location> locations = new ArrayList<>();
+        locations.add(jastarnia);
+        locations.add(bridgertown);
+        locations.add(fortaleza);
+        locations.add(pissouri);
+        locations.add(leMorne);
 
-        forecastForLocations.stream()
-                .flatMap(location -> location.getForecastsForLocation().stream())
-                .filter(forecast -> forecast.getAvrTemp() > 5 && forecast.getAvrTemp() < 35)
-                .filter(f -> f.getWindSpd() > 5 && f.getWindSpd() < 18)
-                .forEach(System.out::println);
+        Location bestLocation = null;
+        double bestScore = Double.NEGATIVE_INFINITY;
 
-        if (forecastForLocations.size() > 1){
+        List<Location> filteredLocations = new ArrayList<>();
+        for (Location location : locations) {
+            boolean isGoodLocation = true;
+            for (Forecast forecast : location.getForecastsForLocation()) {
+                if (forecast.getWindSpd() > 5 || forecast.getWindSpd() < 18 ||
+                        forecast.getAvrTemp() > 5 || forecast.getAvrTemp() < 35) {
+                    isGoodLocation = true;
+//                    break;
+                }
+            }
+            if (isGoodLocation) {
+                filteredLocations.add(location);
+            }
+        }
+
+        if (filteredLocations.size() == 1) {
+            return filteredLocations.get(0);
+
+        } else {
+            for (Location location : filteredLocations) {
+                double locationScore = 0;
+                for (Forecast forecast : location.getForecastsForLocation()) {
+
+                    locationScore = 0;
+                    locationScore = forecast.getWindSpd() * 3 + forecast.getAvrTemp();
+                }
+
+                if (locationScore > bestScore) {
+                    bestScore = locationScore;
+                    bestLocation = location;
+                }
+            }
+            System.out.println(bestLocation);
+            return bestLocation;
 
         }
+
     }
 }
-
-

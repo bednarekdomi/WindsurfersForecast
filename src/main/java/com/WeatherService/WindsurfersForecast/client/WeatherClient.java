@@ -40,10 +40,8 @@ public class WeatherClient {
             for (JsonNode jsonNode : dataNode) {
                 Forecast weatherData = new Forecast();
                 weatherData.setDatetime(LocalDate.parse(jsonNode.get("datetime").asText()));
-                weatherData.setCityName(city);
-                weatherData.setCountryCode("country_code");
-                weatherData.setWindSpd(jsonNode.get("wind_spd").asDouble());
                 weatherData.setAvrTemp(jsonNode.get("temp").asDouble());
+                weatherData.setWindSpd(jsonNode.get("wind_spd").asDouble());;
                 weatherDataList.add(weatherData);
             }
         }
