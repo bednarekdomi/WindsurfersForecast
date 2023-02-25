@@ -1,8 +1,11 @@
 package com.WeatherService.WindsurfersForecast.controller;
 
-import com.WeatherService.WindsurfersForecast.Service.LocationService;
-import com.WeatherService.WindsurfersForecast.domain.Location;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.WeatherService.WindsurfersForecast.dto.ForecastDto;
+import com.WeatherService.WindsurfersForecast.dto.Location;
+import com.WeatherService.WindsurfersForecast.service.BusinessService;
+import com.WeatherService.WindsurfersForecast.service.LocationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -11,13 +14,12 @@ import java.time.LocalDate;
 @RequestMapping(value = "/WeatherApp")
 public class LocationController {
 
-    private LocationService locationService;
+    @Autowired
+    private BusinessService businessService;
 
-    @GetMapping(name = "/getLocationWithBestConditions")
-    public Location getLocationWithBestConditions(@PathVariable LocalDate date) throws JsonProcessingException {
-        Location location = locationService.getLocationWithBestConditions(date);
-        System.out.println(location);
-        return location;
+    @GetMapping(value = "/getLocationWithBestConditions")
+    public Location getLocationWithBestConditions(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+        return businessService.getBestCityByDate(date);
     }
 }
 

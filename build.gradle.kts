@@ -28,6 +28,7 @@ dependencies {
 	implementation("mysql:mysql-connector-java:8.0.32")
 	implementation("com.googlecode.json-simple:json-simple:1.1.1")
 	implementation("com.mashape.unirest:unirest-java:1.4.9")
+	implementation("org.springframework.boot:spring-boot-starter-webflux:2.7.8")
 
 
 }
