@@ -1,8 +1,7 @@
 package com.WeatherService.WindsurfersForecast.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -12,6 +11,8 @@ import java.time.LocalDate;
 
 @Data
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ForecastDto {
 
@@ -19,6 +20,5 @@ public class ForecastDto {
     private LocalDate datetime;
     private double temp;
     private double wind_spd;
-
     private double bestScore;
 }
